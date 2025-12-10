@@ -7,8 +7,8 @@
   </head>
   <body>
     nome do aluno: <input type="text" id="iptNome" /><br />
-    nota 1: <input type="number" id="iptNum1" /> 
-    nota 2: <input type="number" id="iptNum2" /> 
+    nota 1: <input type="number" id="iptNum1" /> <br>
+    nota 2: <input type="number" id="iptNum2" /> <br>
     nota 3: <input type="number" id="iptNum3" /><br>
     <button onclick="cadastrar()">Cadastrar</button><br>
     <div id="msg"></div>
@@ -26,7 +26,7 @@
     if (nome.length < 9 || nome == '') {
     erro +='Nome tem que ter no minimo 9 letras.<br>'    
     }
-    if (nota1 > 10 || nota < 0) {
+    if (nota1 > 10 || nota1 < 0) {
     erro +='Nota 1 precisa ser entre 0 e 10.<br>';  
     }
     if (nota2 > 10 || nota2 < 0) {
