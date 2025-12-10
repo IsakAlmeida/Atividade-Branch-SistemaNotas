@@ -1,23 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    nome do aluno: <input type="text" id="iptNome" /><br />
-    nota 1: <input type="number" id="iptNum1" /> <br>
-    nota 2: <input type="number" id="iptNum2" /> <br>
-    nota 3: <input type="number" id="iptNum3" /><br>
-    <button onclick="cadastrar()">Cadastrar</button>
-    <button onclick="media()">Média</button><br>
-    <div id="msg"></div>
-  </body>
-  <script>
-    var alunos = [];
 
-    function cadastrar() {
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+</head>
+
+<body>
+  nome do aluno: <input type="text" id="iptNome" /><br />
+  nota 1: <input type="number" id="iptNum1" /> <br>
+  nota 2: <input type="number" id="iptNum2" /> <br>
+  nota 3: <input type="number" id="iptNum3" /><br>
+  <button onclick="cadastrar()">Cadastrar</button>
+  <button onclick="media()">Média</button>
+  <button onclick="aluno()">Aluno</button><br>
+  <div id="msg"></div>
+</body>
+<script>
+  var alunos = [];
+
+  function cadastrar() {
     var nome = iptNome.value;
     var nota1 = Number(iptNum1.value);
     var nota2 = Number(iptNum2.value);
@@ -26,33 +29,49 @@
     var erro = '';
 
     if (nome.length < 9 || nome == '') {
-    erro +='Nome tem que ter no minimo 9 letras.<br>'    
+      erro += 'Nome tem que ter no minimo 9 letras.<br>'
     }
     if (nota1 > 10 || nota1 < 0) {
-    erro +='Nota 1 precisa ser entre 0 e 10.<br>';  
+      erro += 'Nota 1 precisa ser entre 0 e 10.<br>';
     }
     if (nota2 > 10 || nota2 < 0) {
-    erro +='Nota 2 precisa ser entre 0 e 10.<br>';    
+      erro += 'Nota 2 precisa ser entre 0 e 10.<br>';
     }
     if (nota3 > 10 || nota3 < 0) {
-    erro +='Nota 3 precisa ser entre 0 e 10.'    
+      erro += 'Nota 3 precisa ser entre 0 e 10.'
     }
-    if (erro !='') {
-        msg.innerHTML = `Erro detectado: <br> ${erro}`; 
-        msg.innerHTML = "Existem erros."
-        return;  
+    if (erro != '') {
+      msg.innerHTML = `Erro detectado: <br> ${erro}`;
+      msg.innerHTML = "Existem erros."
+      return;
     }
-        var aluno = {
-            nome: nome,
-            n1: nota1,
-            n2: nota2,
-            n3: nota3,
-            media: media
+    var aluno = {
+      nome: nome,
+      n1: nota1,
+      n2: nota2,
+      n3: nota3,
+      media: media
+    }
+    alunos.push(aluno);
+    msg.innerHTML = "Aluno cadastrado.";
+  }
+
+  function aluno() {
+    var respostaValida = false;
+
+    while (!respostaValida) {
+      var resposta = prompt("Digite o nome do aluno que deseja pesquisar:");
+
+      for (let i = 0; i < alunos.length; i++) {
+        if (alunos[i].nome == resposta) {
+          msg.innerHTML = `Nome do aluno: ${alunos[i].nome} | N1: ${Number(alunos[i].n1).toFixed(1)} | N2: ${Number(alunos[i].n2).toFixed(1)} | N3: ${Number(alunos[i].n3).toFixed(1)} | Média: ${Number(alunos[i].media).toFixed(1)} | Pesquisa por aluno`;
+          respostaValida = true;
+        } else {
+          alert("Aluno não encontrado!");
         }
-        alunos.push(aluno);
-        msg.innerHTML = "Aluno cadastrado.";
+      }
     }
+  }
+</script>
 
-
-  </script>
 </html>
