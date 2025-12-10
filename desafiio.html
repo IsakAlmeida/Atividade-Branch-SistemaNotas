@@ -15,6 +15,7 @@
   <button onclick="cadastrar()">Cadastrar</button>
   <button onclick="listar()">Listar</button><br>
   <button onclick="aluno()">Aluno</button><br>
+  <button onclick="maiorque()">Nota maior que</button><br>
   <div id="msg"></div>
 </body>
 <script>
@@ -79,6 +80,27 @@
         for(let i=alunos.length-1;i>=0;i--){
           msg.innerHTML += `Nome do Aluno: ${alunos[i].nome} | N1: ${alunos[i].n1} | N2: ${alunos[i].n2} | N3: ${alunos[i].n3} | Média: ${alunos[i].media}<br>`
         }
+      }
+    }
+
+    function maiorque() {
+      msg.innerHTML = ''
+
+      if (alunos.length == 0) {
+        alert("Nenhum aluno cadastrado")
+
+        return;
+      }
+
+      var nota_limite = prompt("Informe a nota limite")
+      console.log(nota_limite)
+
+      for (let i = 0; i < alunos.length; i++) {
+        if ((alunos[i].n1 > nota_limite) || (alunos[i].n2 > nota_limite) || (alunos[i].n3 > nota_limite)) {
+          
+          msg.innerHTML += `Nome do aluno: ${alunos[i].nome} | N1: ${alunos[i].n1} | N2: ${alunos[i].n2} | N3: ${alunos[i].n3} |Média: ${(alunos[i].media).toFixed(1)} | Notas maior que <br>`
+        }
+        
       }
     }
 
