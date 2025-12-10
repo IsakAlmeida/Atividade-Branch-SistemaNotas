@@ -13,7 +13,7 @@
   nota 2: <input type="number" id="iptNum2" /> <br>
   nota 3: <input type="number" id="iptNum3" /><br>
   <button onclick="cadastrar()">Cadastrar</button>
-  <button onclick="media()">Média</button>
+  <button onclick="listar()">Listar</button><br>
   <button onclick="aluno()">Aluno</button><br>
   <div id="msg"></div>
 </body>
@@ -55,6 +55,32 @@
     alunos.push(aluno);
     msg.innerHTML = "Aluno cadastrado.";
   }
+
+    function listar(){
+      var respostaValida = false;
+      while(!respostaValida){
+        var respostaPrompt = prompt('Digite "A" para listar os alunos de forma Ascendente (do primeiro para o último) ou "D" para listar de forma Decrescente (do último para o primeiro)');
+        if(respostaPrompt.toUpperCase()=='A' || respostaPrompt.toUpperCase()=='D'){
+          respostaValida=true;
+        }else{
+          alert('Informe um valor válido.')
+        }
+      }
+      if(alunos.length<1){
+        msg.innerHTML = 'Existem erros.'
+        return;
+      }
+      msg.innerHTML = '';
+      if(respostaPrompt.toUpperCase()=="A"){
+        alunos.forEach(aluno=>{
+          msg.innerHTML +=`Nome do Aluno: ${aluno.nome} | N1: ${aluno.n1} | N2: ${aluno.n2} | N3: ${aluno.n3} | Média: ${aluno.media}<br>`;
+        })
+      }else{
+        for(let i=alunos.length-1;i>=0;i--){
+          msg.innerHTML += `Nome do Aluno: ${alunos[i].nome} | N1: ${alunos[i].n1} | N2: ${alunos[i].n2} | N3: ${alunos[i].n3} | Média: ${alunos[i].media}<br>`
+        }
+      }
+    }
 
   function aluno() {
     var respostaValida = false;
