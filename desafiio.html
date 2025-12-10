@@ -1,58 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    nome do aluno: <input type="text" id="iptNome" /><br />
-    nota 1: <input type="number" id="iptNum1" /> <br>
-    nota 2: <input type="number" id="iptNum2" /> <br>
-    nota 3: <input type="number" id="iptNum3" /><br>
-    <button onclick="cadastrar()">Cadastrar</button>
-    <button onclick="media()">Média</button><br>
-    <div id="msg"></div>
-  </body>
-  <script>
-    var alunos = [];
 
-    function cadastrar() {
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+</head>
+
+<body>
+  nome do aluno: <input type="text" id="iptNome" /><br />
+  nota 1: <input type="number" id="iptNum1" /> <br>
+  nota 2: <input type="number" id="iptNum2" /> <br>
+  nota 3: <input type="number" id="iptNum3" /><br>
+  <button onclick="cadastrar()">Cadastrar</button>
+  <button onclick="media()">Média</button><br>
+  <div id="msg"></div>
+</body>
+<script>
+  var alunos = [];
+
+  function cadastrar() {
     var nome = iptNome.value;
     var nota1 = Number(iptNum1.value);
     var nota2 = Number(iptNum2.value);
     var nota3 = Number(iptNum3.value);
-    var media = (nota1 + nota2 + nota3) / 3;
+    var media = ((nota1 + nota2 + nota3) / 3).toFixed(1);
     var erro = '';
 
     if (nome.length < 9 || nome == '') {
-    erro +='Nome tem que ter no minimo 9 letras.<br>'    
+      erro += 'Nome tem que ter no minimo 9 letras.<br>'
     }
     if (nota1 > 10 || nota1 < 0) {
-    erro +='Nota 1 precisa ser entre 0 e 10.<br>';  
+      erro += 'Nota 1 precisa ser entre 0 e 10.<br>';
     }
     if (nota2 > 10 || nota2 < 0) {
-    erro +='Nota 2 precisa ser entre 0 e 10.<br>';    
+      erro += 'Nota 2 precisa ser entre 0 e 10.<br>';
     }
     if (nota3 > 10 || nota3 < 0) {
-    erro +='Nota 3 precisa ser entre 0 e 10.'    
+      erro += 'Nota 3 precisa ser entre 0 e 10.'
     }
-    if (erro !='') {
-        msg.innerHTML = `Erro detectado: <br> ${erro}`; 
-        msg.innerHTML = "Existem erros."
-        return;  
+    if (erro != '') {
+      msg.innerHTML = `Erro detectado: <br> ${erro}`;
+      msg.innerHTML = "Existem erros."
+      return;
     }
-        var aluno = {
-            nome: nome,
-            n1: nota1,
-            n2: nota2,
-            n3: nota3,
-            media: media
+    var aluno = {
+      nome: nome,
+      n1: nota1,
+      n2: nota2,
+      n3: nota3,
+      media: media
+    }
+    alunos.push(aluno);
+    msg.innerHTML = "Aluno cadastrado.";
+  }
+
+  function media() {
+        msg.innerHTML = "";
+        var respostaValida = false;
+
+        if (alunos.length < 1) {
+            msg.innerHTML = `Nenhum aluno cadastrado!`;
         }
-        alunos.push(aluno);
-        msg.innerHTML = "Aluno cadastrado.";
+        else {
+            while (!respostaValida) {
+                var situacaoMedia = prompt("Deseja a maior ou a menor média?");
+
+                if (situacaoMedia == "Maior" || situacaoMedia == "maior") {
+                    var maiorMedia = 0;
+                    var alunoMaiorMedia = 0;
+                    for (let i = 0; i < alunos.length; i++) {
+                        if (alunos[i].media > maiorMedia) {
+                            maiorMedia = alunos[i].media;
+                            alunoMaiorMedia = i;
+                        }
+                    }
+
+                    msg.innerHTML = `Aluno: ${alunos[alunoMaiorMedia].nome} – N1: ${alunos[alunoMaiorMedia].n1} – N2: ${alunos[alunoMaiorMedia].n2} – N3: ${alunos[alunoMaiorMedia].n3} - Média: ${alunos[alunoMaiorMedia].media} - Maior média<br>`;
+                    respostaValida = true;
+                } if (situacaoMedia == "Menor" || situacaoMedia == "menor") {
+                    var menorMedia = 10;
+                    var alunoMenorMedia = 0;
+                    for (let i = 0; i < alunos.length; i++) {
+                        if (alunos[i].mediaAluno < menorMedia) {
+                            menorMedia = alunos[i].media;
+                            alunoMenorMedia = i;
+                        }
+                    }
+
+                    msg.innerHTML = `Aluno: ${alunos[alunoMenorMedia].nome} – N1: ${alunos[alunoMenorMedia].n1} – N2: ${alunos[alunoMenorMedia].n2} – N3: ${alunos[alunoMenorMedia].n3} - Média: ${alunos[alunoMenorMedia].media} - Menor média<br>`;
+                    respostaValida = true;
+                }
+            }
+        }
+
     }
 
 
-  </script>
+</script>
+
 </html>
