@@ -13,6 +13,9 @@
   nota 2: <input type="number" id="iptNum2" /> <br>
   nota 3: <input type="number" id="iptNum3" /><br>
   <button onclick="cadastrar()">Cadastrar</button>
+  <button onclick="listar()">Listar</button><br>
+  <button onclick="aluno()">Aluno</button>
+  <button onclick="maiorque()">Nota maior que</button><br>
   <button onclick="media()">Média</button><br>
   <div id="msg"></div>
 </body>
@@ -94,9 +97,69 @@
             }
         }
 
+    function listar(){
+      var respostaValida = false;
+      while(!respostaValida){
+        var respostaPrompt = prompt('Digite "A" para listar os alunos de forma Ascendente (do primeiro para o último) ou "D" para listar de forma Decrescente (do último para o primeiro)');
+        if(respostaPrompt.toUpperCase()=='A' || respostaPrompt.toUpperCase()=='D'){
+          respostaValida=true;
+        }else{
+          alert('Informe um valor válido.')
+        }
+      }
+      if(alunos.length<1){
+        msg.innerHTML = 'Existem erros.'
+        return;
+      }
+      msg.innerHTML = '';
+      if(respostaPrompt.toUpperCase()=="A"){
+        alunos.forEach(aluno=>{
+          msg.innerHTML +=`Nome do Aluno: ${aluno.nome} | N1: ${aluno.n1} | N2: ${aluno.n2} | N3: ${aluno.n3} | Média: ${aluno.media}<br>`;
+        })
+      }else{
+        for(let i=alunos.length-1;i>=0;i--){
+          msg.innerHTML += `Nome do Aluno: ${alunos[i].nome} | N1: ${alunos[i].n1} | N2: ${alunos[i].n2} | N3: ${alunos[i].n3} | Média: ${alunos[i].media)}<br>`
+        }
+      }
     }
 
+    function maiorque() {
+      msg.innerHTML = ''
 
+      if (alunos.length == 0) {
+        alert("Nenhum aluno cadastrado")
+
+        return;
+      }
+
+      var nota_limite = prompt("Informe a nota limite")
+      console.log(nota_limite)
+
+      for (let i = 0; i < alunos.length; i++) {
+        if ((alunos[i].n1 > nota_limite) || (alunos[i].n2 > nota_limite) || (alunos[i].n3 > nota_limite)) {
+          
+          msg.innerHTML += `Nome do aluno: ${alunos[i].nome} | N1: ${alunos[i].n1} | N2: ${alunos[i].n2} | N3: ${alunos[i].n3} |Média: ${(alunos[i].media).toFixed(1)} | Notas maior que <br>`
+        }
+        
+      }
+    }
+
+  function aluno() {
+    var respostaValida = false;
+
+    while (!respostaValida) {
+      var resposta = prompt("Digite o nome do aluno que deseja pesquisar:");
+
+      for (let i = 0; i < alunos.length; i++) {
+        if (alunos[i].nome == resposta) {
+          msg.innerHTML = `Nome do aluno: ${alunos[i].nome} | N1: ${Number(alunos[i].n1).toFixed(1)} | N2: ${Number(alunos[i].n2).toFixed(1)} | N3: ${Number(alunos[i].n3).toFixed(1)} | Média: ${Number(alunos[i].media).toFixed(1)} | Pesquisa por aluno`;
+          respostaValida = true;
+        } else {
+          alert("Aluno não encontrado!");
+        }
+      }
+    }
+  }
 </script>
 
 </html>
