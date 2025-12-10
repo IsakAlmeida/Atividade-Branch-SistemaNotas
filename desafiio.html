@@ -14,8 +14,9 @@
   nota 3: <input type="number" id="iptNum3" /><br>
   <button onclick="cadastrar()">Cadastrar</button>
   <button onclick="listar()">Listar</button><br>
-  <button onclick="aluno()">Aluno</button><br>
+  <button onclick="aluno()">Aluno</button>
   <button onclick="maiorque()">Nota maior que</button><br>
+  <button onclick="media()">Média</button><br>
   <div id="msg"></div>
 </body>
 <script>
@@ -26,7 +27,7 @@
     var nota1 = Number(iptNum1.value);
     var nota2 = Number(iptNum2.value);
     var nota3 = Number(iptNum3.value);
-    var media = (nota1 + nota2 + nota3) / 3;
+    var media = ((nota1 + nota2 + nota3) / 3).toFixed(1);
     var erro = '';
 
     if (nome.length < 9 || nome == '') {
@@ -57,6 +58,45 @@
     msg.innerHTML = "Aluno cadastrado.";
   }
 
+  function media() {
+        msg.innerHTML = "";
+        var respostaValida = false;
+
+        if (alunos.length < 1) {
+            msg.innerHTML = `Nenhum aluno cadastrado!`;
+        }
+        else {
+            while (!respostaValida) {
+                var situacaoMedia = prompt("Deseja a maior ou a menor média?");
+
+                if (situacaoMedia == "Maior" || situacaoMedia == "maior") {
+                    var maiorMedia = 0;
+                    var alunoMaiorMedia = 0;
+                    for (let i = 0; i < alunos.length; i++) {
+                        if (alunos[i].media > maiorMedia) {
+                            maiorMedia = alunos[i].media;
+                            alunoMaiorMedia = i;
+                        }
+                    }
+
+                    msg.innerHTML = `Aluno: ${alunos[alunoMaiorMedia].nome} – N1: ${alunos[alunoMaiorMedia].n1} – N2: ${alunos[alunoMaiorMedia].n2} – N3: ${alunos[alunoMaiorMedia].n3} - Média: ${alunos[alunoMaiorMedia].media} - Maior média<br>`;
+                    respostaValida = true;
+                } if (situacaoMedia == "Menor" || situacaoMedia == "menor") {
+                    var menorMedia = 10;
+                    var alunoMenorMedia = 0;
+                    for (let i = 0; i < alunos.length; i++) {
+                        if (alunos[i].mediaAluno < menorMedia) {
+                            menorMedia = alunos[i].media;
+                            alunoMenorMedia = i;
+                        }
+                    }
+
+                    msg.innerHTML = `Aluno: ${alunos[alunoMenorMedia].nome} – N1: ${alunos[alunoMenorMedia].n1} – N2: ${alunos[alunoMenorMedia].n2} – N3: ${alunos[alunoMenorMedia].n3} - Média: ${alunos[alunoMenorMedia].media} - Menor média<br>`;
+                    respostaValida = true;
+                }
+            }
+        }
+
     function listar(){
       var respostaValida = false;
       while(!respostaValida){
@@ -78,7 +118,7 @@
         })
       }else{
         for(let i=alunos.length-1;i>=0;i--){
-          msg.innerHTML += `Nome do Aluno: ${alunos[i].nome} | N1: ${alunos[i].n1} | N2: ${alunos[i].n2} | N3: ${alunos[i].n3} | Média: ${alunos[i].media}<br>`
+          msg.innerHTML += `Nome do Aluno: ${alunos[i].nome} | N1: ${alunos[i].n1} | N2: ${alunos[i].n2} | N3: ${alunos[i].n3} | Média: ${alunos[i].media)}<br>`
         }
       }
     }
