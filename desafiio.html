@@ -73,7 +73,7 @@
           var maiorMedia = 0;
           var alunoMaiorMedia = 0;
           for (let i = 0; i < alunos.length; i++) {
-            if (alunos[i].media > maiorMedia) {
+            if (Number(alunos[i].media) > maiorMedia) {
               maiorMedia = alunos[i].media;
               alunoMaiorMedia = i;
             }
@@ -81,11 +81,12 @@
 
           msg.innerHTML = `Aluno: ${alunos[alunoMaiorMedia].nome} – N1: ${alunos[alunoMaiorMedia].n1} – N2: ${alunos[alunoMaiorMedia].n2} – N3: ${alunos[alunoMaiorMedia].n3} - Média: ${alunos[alunoMaiorMedia].media} - Maior média<br>`;
           respostaValida = true;
-        } if (situacaoMedia == "Menor" || situacaoMedia == "menor") {
+        } 
+        if (situacaoMedia == "Menor" || situacaoMedia == "menor") {
           var menorMedia = 10;
           var alunoMenorMedia = 0;
           for (let i = 0; i < alunos.length; i++) {
-            if (alunos[i].mediaAluno < menorMedia) {
+            if (Number(alunos[i].mediaAluno) < menorMedia) {
               menorMedia = alunos[i].media;
               alunoMenorMedia = i;
             }
@@ -120,47 +121,47 @@
     } else {
       for (let i = alunos.length - 1; i >= 0; i--) {
         msg.innerHTML += `Nome do Aluno: ${alunos[i].nome} | N1: ${alunos[i].n1} | N2: ${alunos[i].n2} | N3: ${alunos[i].n3} | Média: ${alunos[i].media} <br>`
+      }
     }
   }
-}
 
-        function maiorque() {
-          msg.innerHTML = ''
+  function maiorque() {
+    msg.innerHTML = ''
 
-  if (alunos.length == 0) {
-          alert("Nenhum aluno cadastrado")
+    if (alunos.length == 0) {
+      alert("Nenhum aluno cadastrado")
 
-    return;
+      return;
+    }
+
+    var nota_limite = prompt("Informe a nota limite")
+    console.log(nota_limite)
+
+    for (let i = 0; i < alunos.length; i++) {
+      if ((alunos[i].n1 > nota_limite) || (alunos[i].n2 > nota_limite) || (alunos[i].n3 > nota_limite)) {
+
+        msg.innerHTML += `Nome do aluno: ${alunos[i].nome} | N1: ${alunos[i].n1} | N2: ${alunos[i].n2} | N3: ${alunos[i].n3} |Média: ${alunos[i].media} | Notas maior que <br>`
+      }
+
+    }
   }
 
-        var nota_limite = prompt("Informe a nota limite")
-        console.log(nota_limite)
+  function aluno() {
+    var respostaValida = false;
 
-        for (let i = 0; i < alunos.length; i++) {
-    if ((alunos[i].n1 > nota_limite) || (alunos[i].n2 > nota_limite) || (alunos[i].n3 > nota_limite)) {
+    while (!respostaValida) {
+      var resposta = prompt("Digite o nome do aluno que deseja pesquisar:");
 
-          msg.innerHTML += `Nome do aluno: ${alunos[i].nome} | N1: ${alunos[i].n1} | N2: ${alunos[i].n2} | N3: ${alunos[i].n3} |Média: ${(alunos[i].media).toFixed(1)} | Notas maior que <br>`
-        }
-    
-  }
-}
-
-        function aluno() {
-var respostaValida = false;
-
-        while (!respostaValida) {
-  var resposta = prompt("Digite o nome do aluno que deseja pesquisar:");
-
-        for (let i = 0; i < alunos.length; i++) {
-    if (alunos[i].nome == resposta) {
+      for (let i = 0; i < alunos.length; i++) {
+        if (alunos[i].nome == resposta) {
           msg.innerHTML = `Nome do aluno: ${alunos[i].nome} | N1: ${Number(alunos[i].n1).toFixed(1)} | N2: ${Number(alunos[i].n2).toFixed(1)} | N3: ${Number(alunos[i].n3).toFixed(1)} | Média: ${Number(alunos[i].media).toFixed(1)} | Pesquisa por aluno`;
-        respostaValida = true;
-    } else {
+          respostaValida = true;
+        } else {
           alert("Aluno não encontrado!");
+        }
+      }
     }
   }
-}
-}
 </script>
 
 </html>
